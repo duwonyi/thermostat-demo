@@ -163,16 +163,15 @@ async function changeStateOfThermostat(dispatch, data) {
 
 function checkThenRunAuto(dispatch, state) {
   const { uuid, thermostatState, desiredTemperature, indoor, outdoor } = state
+  const expectedState = getStateToGo(indoor, outdoor, desiredTemperature)
   if (
     uuid !== null &&
     inAutoMode(thermostatState) &&
-    getStateToGo(indoor, outdoor, desiredTemperature) !== thermostatState
+    expectedState !== thermostatState
   ) {
-    runInAuto(dispatch, {
+    changeStateOfThermostat(dispatch, {
       uuid,
-      outdoor,
-      indoor,
-      desiredTemperature
+      state: expectedState
     })
   }
 }
