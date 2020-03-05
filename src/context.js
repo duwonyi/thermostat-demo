@@ -51,7 +51,7 @@ function appReducer(state, action) {
       return { ...state, loading: true }
     }
     case SUCCESS_REQUEST: {
-      return { ...state, loading: false }
+      return { ...state, loading: false, error: null }
     }
     case ERROR_REQUEST: {
       return { ...state, loading: false, error: action.error }
@@ -63,10 +63,7 @@ function appReducer(state, action) {
 }
 
 function AppProvider({ children }) {
-  const [state, dispatch] = useReducer(
-    appReducer,
-    (localState && localState.error !== null) || initialState
-  )
+  const [state, dispatch] = useReducer(appReducer, localState || initialState)
 
   useEffect(() => {
     localStorage.setItem(KEY_LOCAL_STORAGE, JSON.stringify(state))
