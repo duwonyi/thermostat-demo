@@ -1,8 +1,13 @@
-import React from 'react'
+import React  from 'react'
+
+import { AppProvider } from './context'
+import Thermostat from './Thermostat'
 
 function App() {
   return (
-    <div>APP</div>
+    <AppProvider>
+      <Thermostat />
+    </AppProvider>
   )
 }
 
