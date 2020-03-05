@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
+import { useAppState, useAppDispatch } from './context'
 import {
-  useAppState,
-  useAppDispatch,
   updateTemperature,
   register,
   changeStateOfThermostat,
   updateDesiredTemperature,
   runInAuto
-} from './context'
+} from './actions'
 import { getCurrentTemperature, inAutoMode } from './utils'
 import { useInterval } from './hooks'
 import { INTERVAL, THERMOSTAT_STATE } from './constants'
@@ -23,17 +22,6 @@ function Thermostat() {
   } = useAppState()
   const { outdoor, indoor } = getCurrentTemperature({ outHistory, inHistory })
   const [desiredTemperature, setDesiredTemperature] = useState(desired)
-
-  // let [count, setCount] = useState(300)
-  // useEffect(() => {
-  //   if (count === 0) {
-  //     setCount(300)
-  //   }
-  // }, [count])
-
-  // useInterval(() => {
-  //   setCount(count - 1)
-  // }, 1000)
 
   const dispatch = useAppDispatch()
 
@@ -99,7 +87,6 @@ function Thermostat() {
   return (
     <div>
       <h1>Parity Thermostat</h1>
-      {/* <div>Countdown: {count}</div> */}
       <div>Current Outdoor Temperature: {outdoor}</div>
       <div>Current Indoor Temperature: {indoor}</div>
       <div>UUID: {uuid}</div>
