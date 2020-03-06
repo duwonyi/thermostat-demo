@@ -27,4 +27,22 @@ function getStateToGo(currentRoom, currentOutdoor, desiredTemperature) {
   }
 }
 
-export { getCurrentTemperature, inAutoMode, getStateToGo }
+function getStatus(state) {
+  switch (state) {
+    case THERMOSTAT_STATE.OFF:
+      return 'OFF'
+    case THERMOSTAT_STATE.HEAT:
+      return 'HEAT'
+    case THERMOSTAT_STATE.COOL:
+      return 'COOL'
+    case THERMOSTAT_STATE.AUTO_COOL:
+    case THERMOSTAT_STATE.AUTO_HEAT:
+      return 'AUTO'
+    case THERMOSTAT_STATE.AUTO_STANDBY:
+      return 'STANBY'
+    default:
+      return ''
+  }
+}
+
+export { getCurrentTemperature, inAutoMode, getStateToGo, getStatus }
